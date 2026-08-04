@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Website Creator</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    display:flex;
+    height:100vh;
+}
+
+#editor{
+    width:35%;
+    background:#f4f4f4;
+    padding:20px;
+    overflow:auto;
+    border-right:2px solid #ddd;
+}
+
+#preview{
+    width:65%;
+    border:none;
+}
+
+input, textarea, select{
+    width:100%;
+    padding:10px;
+    margin:8px 0 15px;
+    box-sizing:border-box;
+}
+
+button{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+</style>
+</head>
+
+<body>
+
+<div id="editor">
+
+<h2>Website Creator</h2>
+
+<label>Website Title</label>
+<input id="title" value="My Website">
+
+<label>Heading</label>
+<input id="heading" value="Welcome!">
+
+<label>Paragraph</label>
+<textarea id="paragraph">This is my awesome website.</textarea>
+
+<label>Background Color</label>
+<input type="color" id="bg" value="#ffffff">
+
+<button onclick="updateWebsite()">Generate Website</button>
+
+</div>
+
+<iframe id="preview"></iframe>
+
+<script>
+
+function updateWebsite(){
+
+let title=document.getElementById("title").value;
+let heading=document.getElementById("heading").value;
+let para=document.getElementById("paragraph").value;
+let bg=document.getElementById("bg").value;
+
+let html=`
+<!DOCTYPE html>
+<html>
+<head>
+<title>${title}</title>
+<style>
+body{
+background:${bg};
+font-family:Arial;
+text-align:center;
+padding:80px;
+}
+h1{
+color:#333;
+font-size:48px;
+}
+p{
+font-size:20px;
+color:#555;
+max-width:700px;
+margin:auto;
+}
+button{
+padding:12px 25px;
+font-size:18px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>${heading}</h1>
+
+<p>${para}</p>
+
+<button>Learn More</button>
+
+</body>
+</html>
+`;
+
+let frame=document.getElementById("preview");
+frame.srcdoc=html;
+
+}
+
+updateWebsite();
+
+</script>
+
+</body>
+</html>
