@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Showcase</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+.container{
+    max-width:1200px;
+    margin:60px auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#0d47a1;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:40px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.content{
+    padding:20px;
+}
+
+.content h2{
+    color:#1565c0;
+    margin-bottom:10px;
+}
+
+.content p{
+    color:#555;
+    line-height:1.6;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    background:#1565c0;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0d47a1;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>💻 Laptop Collection</h1>
+<p class="subtitle">Discover powerful laptops for study, work, and gaming.</p>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800" alt="Laptop">
+<div class="content">
+<h2>Student Laptop</h2>
+<p>Lightweight laptop with a long-lasting battery, perfect for online classes, assignments, and everyday tasks.</p>
+<button>View Details</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=800" alt="Laptop">
+<div class="content">
+<h2>Business Laptop</h2>
+<p>Professional laptop designed for office work, video meetings, programming, and productivity.</p>
+<button>View Details</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=800" alt="Laptop">
+<div class="content">
+<h2>Gaming Laptop</h2>
+<p>High-performance laptop with a powerful graphics card for gaming, streaming, and creative work.</p>
+<button>View Details</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
