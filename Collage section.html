@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Section</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+}
+
+.college{
+    max-width:1200px;
+    margin:60px auto;
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.title h1{
+    color:#0d47a1;
+    font-size:40px;
+}
+
+.title p{
+    color:#666;
+    margin-top:10px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h2{
+    color:#1565c0;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#555;
+    line-height:1.6;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:40px;
+    padding:12px 25px;
+    background:#1565c0;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.btn:hover{
+    background:#0d47a1;
+}
+</style>
+
+</head>
+<body>
+
+<section class="college">
+
+<div class="title">
+<h1>Our College</h1>
+<p>Building knowledge, character, and future leaders.</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h2>🎓 Academic Excellence</h2>
+<p>Our college offers high-quality education with experienced faculty members and modern teaching methods.</p>
+</div>
+
+<div class="card">
+<h2>📚 Library</h2>
+<p>A well-equipped library with thousands of books, journals, digital resources, and quiet study spaces.</p>
+</div>
+
+<div class="card">
+<h2>💻 Computer Lab</h2>
+<p>Modern computer laboratories with high-speed internet and the latest software for practical learning.</p>
+</div>
+
+<div class="card">
+<h2>⚽ Sports</h2>
+<p>Indoor and outdoor sports facilities help students maintain physical fitness and teamwork skills.</p>
+</div>
+
+<div class="card">
+<h2>🏫 Campus Life</h2>
+<p>A friendly and inclusive campus with cultural programs, clubs, workshops, and student activities.</p>
+</div>
+
+<div class="card">
+<h2>🚀 Career Support</h2>
+<p>Career counseling, internship opportunities, placement support, and skill development programs.</p>
+</div>
+
+</div>
+
+<center>
+<a href="#" class="btn">Learn More</a>
+</center>
+
+</section>
+
+</body>
+</html>
