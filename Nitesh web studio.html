@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nitesh Web Studio</title>
+
+    <style>
+        /* =========================
+           GLOBAL
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00cec9;
+            --background: #f5f6fa;
+            --card: #ffffff;
+            --text: #222;
+            --muted: #777;
+            --nav: #111827;
+        }
+
+        body.dark {
+            --background: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --muted: #cbd5e1;
+            --nav: #020617;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--nav);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            min-height: 70px;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: #374151;
+            color: white;
+            font-size: 18px;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top left,
+                rgba(108,92,231,0.4),
+                transparent 40%),
+                radial-gradient(circle at bottom right,
+                rgba(0,206,201,0.3),
+                transparent 40%);
+
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 20px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(108,92,231,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================== */
+
+        section {
+            padding: 100px 20px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-box {
+            background: var(--card);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .about-box h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-box p {
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            background: var(--card);
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .stat h3 {
+            font-size: 35px;
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================== */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 35px;
+            border-radius: 18px;
+            transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 23px;
+        }
+
+        .card p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           PROJECTS
+        ========================== */
+
+        .project-tools {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: var(--card);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project {
+            background: var(--card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .project-image {
+            height: 180px;
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 55px;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           SKILLS
+        ========================== */
+
+        .skill {
+            margin-bottom: 25px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress {
+            height: 12px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                var(--primary),
+                var(--secondary)
+            );
+            border-radius: 20px;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info,
+        .contact-form {
+            background: var(--card);
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .contact-info p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            margin: 20px 0;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: var(--background);
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================== */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 500px;
+            width: 100%;
+            background: var(--card);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .close {
+            float: right;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: var(--nav);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer p {
+            color: #aaa;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media(max-width: 850px) {
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--nav);
+                padding: 25px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards,
+            .projects {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .cards,
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 15px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+        }
+
+
+        /* =========================
+           ANIMATION
+        ========================== */
+
+        .fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s;
+        }
+
+        .fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header>
+
+    <nav>
+
+        <a href="#home" class="logo">
+            Nitesh<span>.</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+
+        </ul>
+
+        <div class="nav-buttons">
+
+            <button
+                class="icon-btn"
+                onclick="toggleDarkMode()"
+                title="Dark Mode">
+                🌙
+            </button>
+
+            <button
+                class="icon-btn menu-btn"
+                onclick="toggleMenu()">
+                ☰
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content fade">
+
+        <h1>
+            Build Your
+            <span class="gradient-text">
+                Digital World
+            </span>
+        </h1>
+
+        <p>
+            Welcome to my personal website.
+            I create modern websites, web applications,
+            online stores and digital projects.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#projects"
+               class="btn btn-primary">
+                View My Projects
+            </a>
+
+            <button
+                class="btn btn-outline"
+                onclick="openModal()">
+                Learn More
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+    <div class="container">
+
+        <div class="section-title fade">
+
+            <h2>About Me</h2>
+
+            <p>
+                A little information about me
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-box fade">
+
+                <h3>Hello, I'm Nitesh</h3>
+
+                <p>
+                    I am interested in website development,
+                    programming, technology and digital
+                    projects. I use HTML, CSS and JavaScript
+                    to create websites and interactive
+                    web applications.
+                </p>
+
+                <br>
+
+                <p>
+                    This website is completely customizable.
+                    You can change the text, colors,
+                    sections, projects and design.
+                </p>
+
+            </div>
+
+
+            <div class="stats fade">
+
+                <div class="stat">
+                    <h3>20+</h3>
+                    <p>Projects</p>
+                </div>
+
+                <div class="stat">
+                    <h3>10+</h3>
+                    <p>Websites</p>
+                </div>
+
+                <div class="stat">
+                    <h3>5+</h3>
+                    <p>Technologies</p>
+                </div>
+
+                <div class="stat">
+                    <h3>100%</h3>
+                    <p>Learning</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section id="services">
+
+    <div class="container">
+
+        <div class="section-title fade">
+
+            <h2>My Services</h2>
+
+            <p>
+                Things I can build
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card fade">
+
+                <div class="card-icon">🌐</div>
+
+                <h3>Websites</h3>
+
+                <p>
+                    Modern responsive websites for
+                    personal projects, businesses,
+                    portfolios and organizations.
+                </p>
+
+            </div>
+
+
+            <div class="card fade">
+
+                <div class="card-icon">🛒</div>
+
+                <h3>Online Store</h3>
+
+                <p>
+                    Product pages, shopping interfaces,
+                    categories and modern e-commerce
+                    designs.
+                </p>
+
+            </div>
+
+
+            <div class="card fade">
+
+                <div class="card-icon">🏠</div>
+
+                <h3>Booking Systems</h3>
+
+                <p>
+                    Booking interfaces for hostels,
+                    hotels, rooms, appointments and
+                    other services.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROJECTS
+========================= -->
+
+<section id="projects">
+
+    <div class="container">
+
+        <div class="section-title fade">
+
+            <h2>My Projects</h2>
+
+            <p>
+                Some examples of my work
+            </p>
+
+        </div>
+
+
+        <div class="project-tools">
+
+            <button
+                class="filter-btn active"
+                onclick="filterProjects('all', this)">
+                All
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterProjects('website', this)">
+                Websites
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterProjects('store', this)">
+                Stores
+            </button>
+
+            <button
+                class="filter-btn"
+                onclick="filterProjects('system', this)">
+                Systems
+            </button>
+
+        </div>
+
+
+        <div class="projects">
+
+            <div class="project fade"
+                 data-category="website">
+
+                <div class="project-image">
+                    🌐
+                </div>
+
+                <div class="project-content">
+
+                    <h3>Personal Website</h3>
+
+                    <p>
+                        A responsive personal website
+                        using HTML, CSS and JavaScript.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project fade"
+                 data-category="store">
+
+                <div class="project-image">
+                    🛒
+                </div>
+
+                <div class="project-content">
+
+                    <h3>Nitesh Hegni Store</h3>
+
+                    <p>
+                        An online store project with
+                        product and shopping pages.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="project fade"
+                 data-category="system">
+
+                <div class="project-image">
+                    🏠
+                </div>
+
+                <div class="project-content">
+
+                    <h3>Hostel Booking</h3>
+
+                    <p>
+                        A hostel booking interface for
+                        managing student reservations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SKILLS
+========================= -->
+
+<section id="skills">
+
+    <div class="container">
+
+        <div class="section-title fade">
+
+            <h2>My Skills</h2>
+
+            <p>
+                Technologies I use
+            </p>
+
+        </div>
+
+
+        <div class="skill fade">
+
+            <div class="skill-header">
+                <span>HTML</span>
+                <span>95%</span>
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    style="width:95%">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="skill fade">
+
+            <div class="skill-header">
+                <span>CSS</span>
+                <span>90%</span>
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    style="width:90%">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="skill fade">
+
+            <div class="skill-header">
+                <span>JavaScript</span>
+                <span>80%</span>
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    style="width:80%">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="skill fade">
+
+            <div class="skill-header">
+                <span>GitHub</span>
+                <span>75%</span>
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-bar"
+                    style="width:75%">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section id="contact">
+
+    <div class="container">
+
+        <div class="section-title fade">
+
+            <h2>Contact Me</h2>
+
+            <p>
+                Let's build something together
+            </p>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+
+            <div class="contact-info fade">
+
+                <h3>Get In Touch</h3>
+
+                <br>
+
+                <p>
+                    You can contact me through the
+                    information below.
+                </p>
+
+                <div class="contact-item">
+                    📧 Email:
+                    your@email.com
+                </div>
+
+                <div class="contact-item">
+                    📱 Phone:
+                    +977-XXXXXXXXXX
+                </div>
+
+                <div class="contact-item">
+                    📍 Location:
+                    Nepal
+                </div>
+
+            </div>
+
+
+            <div class="contact-form fade">
+
+                <form onsubmit="sendMessage(event)">
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Your Name"
+                        required
+                    >
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Your Email"
+                        required
+                    >
+
+                    <textarea
+                        id="message"
+                        placeholder="Your Message"
+                        required>
+                    </textarea>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeModal()">
+            &times;
+        </span>
+
+        <h2>Welcome!</h2>
+
+        <br>
+
+        <p>
+            You can customize this website and
+            turn it into your own portfolio,
+            business website, online store,
+            blog or booking system.
+        </p>
+
+        <br>
+
+        <button
+            class="btn btn-primary"
+            onclick="closeModal()">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>Nitesh Web Studio</h3>
+
+    <br>
+
+    <p>
+        © 2026 Nitesh Chaudhary.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /* Dark Mode */
+
+    function toggleDarkMode() {
+
+        document.body.classList.toggle("dark");
+
+        if (document.body.classList.contains("dark")) {
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+        }
+
+    }
+
+
+    /* Remember Dark Mode */
+
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark");
+    }
+
+
+    /* Mobile Menu */
+
+    function toggleMenu() {
+
+        const menu =
+            document.getElementById("navLinks");
+
+        menu.classList.toggle("show");
+
+    }
+
+
+    /* Modal */
+
+    function openModal() {
+
+        document.getElementById("modal").style.display =
+            "flex";
+
+    }
+
+
+    function closeModal() {
+
+        document.getElementById("modal").style.display =
+            "none";
+
+    }
+
+
+    /* Contact Form */
+
+    function sendMessage(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value;
+
+        alert(
+            "Thank you, " +
+            name +
+            "! Your message has been submitted."
+        );
+
+        event.target.reset();
+
+    }
+
+
+    /* Project Filter */
+
+    function filterProjects(category, button) {
+
+        const projects =
+            document.querySelectorAll(".project");
+
+        const buttons =
+            document.querySelectorAll(".filter-btn");
+
+        buttons.forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+
+        projects.forEach(function(project) {
+
+            if (
+                category === "all" ||
+                project.dataset.category === category
+            ) {
+
+                project.style.display = "block";
+
+            } else {
+
+                project.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    /* Scroll Animation */
+
+    const observer =
+        new IntersectionObserver(
+            function(entries) {
+
+                entries.forEach(function(entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    document
+        .querySelectorAll(".fade")
+        .forEach(function(element) {
+
+            observer.observe(element);
+
+        });
+
+
+    /* Close modal when clicking outside */
+
+    window.onclick = function(event) {
+
+        const modal =
+            document.getElementById("modal");
+
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+
+    };
+
+</script>
+
+</body>
+</html>
