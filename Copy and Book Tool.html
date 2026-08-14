@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy & Bookmark Tool</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f8;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px 5px 10px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .copy {
+            background: #007bff;
+            color: white;
+        }
+
+        .bookmark {
+            background: #ff9800;
+            color: white;
+        }
+
+        .clear {
+            background: #e53935;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #message {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .saved {
+            margin-top: 30px;
+        }
+
+        .bookmark-item {
+            background: #f1f1f1;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .delete {
+            background: #e53935;
+            color: white;
+            padding: 8px 12px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📚 Copy & Bookmark</h1>
+
+    <textarea id="text"
+        placeholder="Write or paste your text here..."></textarea>
+
+    <br>
+
+    <button class="copy" onclick="copyText()">
+        📋 Copy
+    </button>
+
+    <button class="bookmark" onclick="addBookmark()">
+        🔖 Bookmark
+    </button>
+
+    <button class="clear" onclick="clearText()">
+        🗑️ Clear
+    </button>
+
+    <div id="message"></div>
+
+    <div class="saved">
+
+        <h2>🔖 My Bookmarks</h2>
+
+        <div id="bookmarks"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Copy text
+    function copyText() {
+
+        const text =
+            document.getElementById("text").value;
+
+        if (text.trim() === "") {
+            alert("Please enter some text first.");
+            return;
+        }
+
+        navigator.clipboard.writeText(text);
+
+        showMessage("✅ Text copied!");
+
+    }
+
+
+    // Add bookmark
+    function addBookmark() {
+
+        const text =
+            document.getElementById("text").value;
+
+        if (text.trim() === "") {
+            alert("Please enter some text first.");
+            return;
+        }
+
+        let bookmarks =
+            JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+        bookmarks.push(text);
+
+        localStorage.setItem(
+            "bookmarks",
+            JSON.stringify(bookmarks)
+        );
+
+        showMessage("🔖 Bookmark saved!");
+
+        displayBookmarks();
+
+    }
+
+
+    // Display bookmarks
+    function displayBookmarks() {
+
+        const bookmarks =
+            JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+        const box =
+            document.getElementById("bookmarks");
+
+        box.innerHTML = "";
+
+        bookmarks.forEach(function(text, index) {
+
+            const item =
+                document.createElement("div");
+
+            item.className = "bookmark-item";
+
+            item.innerHTML = `
+                <span>${escapeHTML(text)}</span>
+
+                <button
+                    class="delete"
+                    onclick="deleteBookmark(${index})">
+                    Delete
+                </button>
+            `;
+
+            box.appendChild(item);
+
+        });
+
+    }
+
+
+    // Delete bookmark
+    function deleteBookmark(index) {
+
+        let bookmarks =
+            JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+        bookmarks.splice(index, 1);
+
+        localStorage.setItem(
+            "bookmarks",
+            JSON.stringify(bookmarks)
+        );
+
+        displayBookmarks();
+
+    }
+
+
+    // Clear text
+    function clearText() {
+
+        document.getElementById("text").value = "";
+
+        showMessage("🗑️ Text cleared!");
+
+    }
+
+
+    // Message
+    function showMessage(message) {
+
+        const box =
+            document.getElementById("message");
+
+        box.innerText = message;
+
+        setTimeout(function() {
+            box.innerText = "";
+        }, 2000);
+
+    }
+
+
+    // Protect displayed text from HTML injection
+    function escapeHTML(text) {
+
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // Load saved bookmarks
+    displayBookmarks();
+
+</script>
+
+</body>
+</html>
